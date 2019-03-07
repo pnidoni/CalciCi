@@ -2,6 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>CalciCi</AssemblyName>
+    <RootNamespace>CalciCi</RootNamespace>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>1.0.0-beta.1</Version>
+    <RepositoryType>Git</RepositoryType>
   </PropertyGroup>
 
 </Project>
