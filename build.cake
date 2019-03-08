@@ -56,6 +56,11 @@ Task("Build")
       {
          Configuration = configuration
       });
+   for (int i = 0; i < Configurations.GetFileNames.Length; i++)
+   {
+      var name = Configurations.GetFileNames[i];
+      Information(name);
+   }
 });
 Task("Test")
    .Does(() =>
