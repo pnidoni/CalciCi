@@ -1,23 +1,29 @@
 version: 1.0.{build}
-image: Visual Studio 2017
 configuration: Release
 build_script:
 - ps: >-
+    echo $Env:APPVEYOR_REPO_TAG_NAME
+
     dotnet clean
 
     dotnet restore
 
-    dotnet build
+    if($Env:APPVEYOR_REPO_TAG -eq "true"){
+       dotnet build -c Release /p:Version=$Env:APPVEYOR_REPO_TAG_NAME ./src/CalciCi/CalciCi.csproj
+    }else {
+       dotnet build
+    }
 test_script:
 - ps: dotnet test
 artifacts:
 - path: .\src\CalciCi\bin\Release\*.nupkg
   name: NuGet
+before_deploy:
+- ps: ''
 deploy:
 - provider: NuGet
   api_key:
     secure: m7+aV1s4BVZh50hw26xIWUACRqjX79zoXba8XVnW0hFqb+XQrLti48ewcWB6k62x
   skip_symbols: true
   on:
-    branch: master
     APPVEYOR_REPO_TAG: true
